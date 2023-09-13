@@ -1,0 +1,22 @@
+//link of the problem: https://practice.geeksforgeeks.org/problems/largest-number-possible5028/1
+
+class Solution{
+public:
+    string findLargest(int N, int S){
+        // code here
+        if(S==0 && N>1) return "-1";
+        string ans="";
+        for(int i=1;i<=N;i++){
+            if(S>=9) {
+                ans=ans+"9";
+                S-=9;
+            }
+            else{
+                ans=ans+to_string(S);
+                S=0;
+            }
+        }
+        if(S>0) return "-1";
+        return ans;
+    }
+};
