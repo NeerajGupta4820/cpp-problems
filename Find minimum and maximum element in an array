@@ -1,0 +1,9 @@
+//link of the  problem: https://practice.geeksforgeeks.org/problems/find-minimum-and-maximum-element-in-an-array4428/1
+
+pair<long long, long long> getMinMax(long long a[], int n) {
+    pair<long long, long long>p;
+    sort(a,a+n);
+    p.first=a[0];
+    p.second=a[n-1];
+    return p;
+}
