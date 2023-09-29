@@ -1,0 +1,13 @@
+//link of the problem :https://leetcode.com/problems/monotonic-array/description/?envType=daily-question&envId=2023-09-29
+
+class Solution {
+public:
+    bool isMonotonic(vector<int>& nums) {
+        bool x=true,y=true;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]<nums[i-1]) x=false;
+            if(nums[i]>nums[i-1]) y=false;
+        }   
+        return x||y;
+    }
+};
