@@ -1,0 +1,55 @@
+//link of the problem : https://practice.geeksforgeeks.org/problems/number-of-enclaves/1
+
+class Solution {
+  public:
+      int countlandCell(int r, int c, vector<vector<int>> &grid){
+        int count =0;
+        for(auto x : grid)
+        {
+            for(auto y: x){
+                (y==1)?++count:0;
+            }
+        }
+        return count;
+    }
+    
+    bool isValid(int x , int y,  int r, int c ,vector<vector<int>> &grid ){
+        if(x<r&&y<c&&x>=0&&y>=0&&grid[x][y]==1)return true;
+        return false;
+    }
+    
+    void dfs(int x , int y, int r , int c , vector<vector<int>> &grid){
+        grid[x][y] = 0;
+        int dx[4] = {0,0,-1,1};
+        int dy[4] = {-1,1,0,0};
+        for(int i=0;i<4;i++){
+            int newX = x+dx[i];
+            int newY = y+dy[i];
+            if(isValid(newX,newY,r,c,grid)){
+                dfs(newX , newY , r, c,grid);
+            }
+        }
+        
+    }
+  
+    int numberOfEnclaves(vector<vector<int>> &grid) {
+        // boundery taveersal 
+        int row = grid.size();
+        int col = grid[0].size();
+        
+        for(int i=0;i<col;i++){
+            int j=0;
+            if(grid[j][i]==1)dfs(j,i,row,col,grid);
+            j = row-1;
+            if(grid[j][i]==1)dfs(j,i,row,col,grid);
+            
+        }
+        for(int i=0;i<row;i++){
+            int j=0;
+            if(grid[i][j]==1)dfs(i,j,row,col,grid);
+            j = col-1;
+            if(grid[i][j]==1)dfs(i,j,row,col,grid);
+        }
+        return countlandCell(row ,col , grid);
+    }
+};
