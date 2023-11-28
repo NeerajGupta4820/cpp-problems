@@ -1,0 +1,16 @@
+class Solution {
+  public:
+    int sumOfDependencies(vector<int> adj[], int v) {
+        // code here
+        int c=0;
+        for(int i=0;i<v;i++)
+        {
+            for(auto x:adj[i])
+            {
+                c++;
+            }
+        }
+        return c;
+    }
+};
+
