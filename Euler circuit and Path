@@ -1,0 +1,42 @@
+class Solution {
+isEulerCircuit(V,Adj){
+        function dfsUtil(u, vis, adj){
+            vis[u] = true;
+            for(let v of adj[u]){
+                if(!vis[v]){
+                    dfsUtil(v, vis, adj);
+                }
+            }
+        }
+        
+        function isConnected(V, adj){
+            let vis = new Array(V).fill(false);
+            let i;
+            for(i = 0; i < V; i++){
+                if(adj[i].length)
+                    break;
+            }
+            dfsUtil(i, vis, adj);
+            for(i = 0; i < V; i++){
+                if(!vis[i] && adj[i].length > 0)
+                    return false;
+            }
+            return true;
+        }
+        
+        if(!isConnected(V, Adj))
+            return 0;
+        
+        let odd = 0;
+        
+        for(let i = 0; i < V; i++){
+            if(Adj[i].length % 2)
+                odd++;
+        }
+        
+        if(odd > 2)
+            return 0;
+        
+        return odd ? 1 : 2;
+    }
+}
