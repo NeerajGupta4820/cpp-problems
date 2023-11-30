@@ -1,0 +1,19 @@
+class Solution{   
+public:
+    int minimumStep(int n){
+        //complete the function here
+        int ans = 0;
+        while(n > 1){
+            if(n == 2){ans++; break;}
+            if(n%3 != 0){
+                ans += n%3;
+                n = n - n%3;
+            }
+            else{
+                n /= 3;
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
