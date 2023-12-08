@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+    int prime[1000010];
+    int minNumber(int arr[],int N)
+    {
+        memset(prime,0,sizeof prime);
+        prime[0]=prime[1]=1;
+        for(long long i=2;i<=1e6;i++){
+            if(prime[i]==0){
+                for(long long j=i*i;j<1e6;j+=i){
+                    prime[j]=1;
+                }
+            }
+        }
+        int s=0;
+        for(int i=0;i<N;i++)s+=arr[i];
+        for(int j=s;j<1e6+10;j++){
+            if(prime[j]==0)return j-s;
+        }
+        return 0;
+    }
+};
