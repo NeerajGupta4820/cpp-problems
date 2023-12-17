@@ -1,0 +1,16 @@
+class Solution{
+public:	
+	// calculate the maximum sum with out adjacent
+	int solve(int *arr,int start,int end,vector<int>&dp){
+	    if(start>=end) return 0;
+	    if(dp[start]!=-1) return dp[start];
+	    int notpick=solve(arr,start+1,end,dp);
+	    int pick=arr[start]+solve(arr,start+2,end,dp);
+	    return dp[start]=max(pick,notpick);
+	}
+	int findMaxSum(int *arr, int n) {
+	    // code here
+	    vector<int>dp(n+1,-1);
+	    return solve(arr,0,n,dp);
+	}
+};
