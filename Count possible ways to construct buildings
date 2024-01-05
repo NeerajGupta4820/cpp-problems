@@ -1,0 +1,19 @@
+class Solution{
+    public:
+    int mod = 1e9 + 7;
+    int dp[100001][2];
+    int fun(int n, bool f) {
+        if(dp[n][f] != -1) return dp[n][f];
+        if(n == 0) return dp[n][f] = 0;
+        int op1 = 0, op2 = 0;
+        if(!f) op1 = 1 + fun(n - 1, 1)%mod;
+        op2 = fun(n - 1, 0)%mod;
+        return  dp[n][f] = (op1 + op2)%mod;
+    }
+    int TotalWays(int N)
+    {
+        memset(dp, -1, sizeof dp);
+        int t = fun(N, 0) + 1;
+        return (t * 1ll * t)%mod;
+    }
+};
