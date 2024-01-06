@@ -1,0 +1,49 @@
+class Solution {
+public:
+    
+    int dp[(int)1e5+1];
+
+    // int find_new(vector<vector<int>>&temp,int idx){
+
+    //     int last_val = temp[idx][1];
+    //     for(int i = idx + 1;i<temp.size();i++){
+    //         if(temp[i][0] >= last_val){
+    //             return i;
+    //         }
+    //     }
+    //     return temp.size();
+    // }
+
+    int solve(vector<vector<int>>&temp,int idx){
+        
+        if(idx >= temp.size()){
+            return 0;
+        }
+        if(dp[idx] != -1){
+            return dp[idx];
+        }
+
+        int dontpick = solve(temp,idx+1);
+        int newIdx = lower_bound(temp.begin() + idx,temp.end(),vector<int>{temp[idx][1],INT_MIN,INT_MIN})-temp.begin();
+        int pick = temp[idx][2] + solve(temp,newIdx);
+        return dp[idx] = max(pick,dontpick);
+    }
+
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+        vector<vector<int>>temp;
+        memset(dp,-1,sizeof dp);
+        int n = startTime.size();
+        for(int i = 0;i<n;i++){
+            temp.push_back({startTime[i],endTime[i],profit[i]});
+        }
+
+        sort(temp.begin(),temp.end());
+        for(auto i:temp){
+            for(auto j:i){
+                cout<<j<<" ";
+            }
+            cout<<endl;
+        }
+        return solve(temp,0);
+    }
+};
