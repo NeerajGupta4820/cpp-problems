@@ -1,0 +1,38 @@
+vector<int> sieve;
+vector<int> spm;
+vector<int> noOfPrimeFac;
+int maxe = 2 * 1e5 + 1;
+
+class Solution {
+public:
+    
+    void init() {
+        if(sieve.size() != 0) return;
+        sieve = vector<int>(maxe, true);
+        spm = vector<int>(maxe);
+        noOfPrimeFac = vector<int>(maxe);
+        
+        sieve[0] = sieve[1] = false;
+        noOfPrimeFac[0] = noOfPrimeFac[1] = 0;
+        
+        for(int i = 2; i < maxe; i++) {
+            if(sieve[i]) {
+                spm[i] = i;
+                for(int j = i + i; j < maxe; j += i) {
+                    sieve[j] = false;
+                    if(spm[j] == 0)
+                        spm[j] = i;
+                }
+            }
+            noOfPrimeFac[i] = 1 + noOfPrimeFac[i/spm[i]];
+        }
+
+        for(int i = 2; i < maxe; i++)
+            noOfPrimeFac[i] += noOfPrimeFac[i-1];
+    }
+
+	int sumOfPowers(int a, int b) {
+	    init();
+	    return noOfPrimeFac[b] - noOfPrimeFac[a-1];
+	}
+};
