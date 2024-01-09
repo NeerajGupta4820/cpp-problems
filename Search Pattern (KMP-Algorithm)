@@ -1,0 +1,9 @@
+vector<int> res;
+            int n = pat.size();
+            for(int i=0; i<txt.size(); i++){
+                if(pat[0] != txt[i]) continue;
+                string curr = txt.substr(i,n);
+                if(curr == pat) res.push_back(i+1);
+            }
+            
+            return res;
