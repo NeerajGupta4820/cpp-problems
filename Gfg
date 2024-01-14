@@ -1,0 +1,30 @@
+class Solution
+{   
+    public:
+    vector<int> repeatedRows(vector<vector<int>> &matrix, int M, int N) 
+    { 
+        // Your code here
+        vector<int> ans;
+        string test = "";
+        unordered_map<string, int> m;
+            
+        for(int i = 0; i < M; i++){
+            
+            for(int j = 0;j < N; j++){
+                
+                test += to_string(matrix[i][j]);
+
+            }
+            
+            if(m[test] == 0){
+                m[test]++;
+            }else{
+                ans.push_back(i);
+            }
+            
+            test = "";
+        }
+        
+        return ans;
+    } 
+};gfg
