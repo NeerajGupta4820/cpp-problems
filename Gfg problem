@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+        /*You are required to complete below method */
+        void solve(Node *root,int &sum)
+        {
+            if(root==NULL)
+            return;
+            if(root->left==NULL && root->right==NULL) // condition for checking node if it is a leaf node or not
+            sum+=root->data;
+            if(root->left!=NULL)
+            {
+                solve(root->left,sum);
+            }
+            if(root->right!=NULL)
+            {
+                solve(root->right,sum);
+            }
+        }
+        int sumOfLeafNodes(Node *root ){
+           int sum=0;
+           solve(root,sum);
+           return sum;
+        }
+};
