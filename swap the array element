@@ -1,0 +1,8 @@
+class Solution{
+  public:
+    void swapElements(int arr[], int n){
+        for(int *i=arr;i<arr+n-2;*i++){
+            swap(*i,*(i+2));
+        }
+    }
+};
