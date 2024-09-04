@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n=height.size();
+        int ptr1=0;
+        int ptr2=n-1;
+        int temp=0;
+        int tapping_water=0;
+        int res=0;
+        while(ptr1<ptr2){
+            temp=min(height[ptr1],height[ptr2]);
+            tapping_water=temp*(ptr2-ptr1);
+            res=max(res,tapping_water);
+            if(height[ptr1]<height[ptr2]) ptr1++;
+            else ptr2--;
+        }
+        return res;
+    }
+};
