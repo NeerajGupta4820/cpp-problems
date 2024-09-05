@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+        int sumofm=0;
+        for(auto x:rolls){
+            sumofm+=x;
+        }
+        int m=rolls.size();
+        int sumofnm=(mean*(n+m));
+        int sumofn=sumofnm-sumofm;
+        if(sumofn>n*6 || sumofn<n) return {};
+        int rem=sumofn%n;
+        int que=sumofn/n;
+        vector<int>missing(n,que);
+        for(int i=1;i<=rem;i++){
+            missing[i]++;
+        }
+        return missing;
+    }
+};
