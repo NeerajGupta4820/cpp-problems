@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int minGroups(vector<vector<int>>& intervals) {
+        vector<int>first,second;
+        for(auto it:intervals){
+            first.push_back(it[0]);
+            second.push_back(it[1]);
+        }
+        sort(first.begin(),first.end());
+        sort(second.begin(),second.end());
+        int ptr=0,count=0;
+        for(auto it:first){
+            if(it>second[ptr]) ptr++;
+            else count++;
+        }
+        return count;
+    }
+};
