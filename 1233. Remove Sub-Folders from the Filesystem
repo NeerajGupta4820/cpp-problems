@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<string> removeSubfolders(vector<string>& folder) {
+        sort(folder.begin(),folder.end());
+        vector<string>ans;
+        vector<bool>visited(folder.size(),false);
+
+        for(int i=0;i<folder.size();i++){
+            string temp=folder[i];
+            int size=temp.size();
+            for(int j=i+1;j<folder.size();j++){
+                string temp2=folder[j];
+                string sub=temp2.substr(0,size);
+                if(sub==temp && (temp2.size() == size || temp2[size] == '/')) 
+                    visited[j]=true;
+                else break;
+            }
+        }
+        for(int i=0;i<visited.size();i++){
+            if(!visited[i]) ans.push_back(folder[i]);
+        }
+        return ans;
+    }
+};
