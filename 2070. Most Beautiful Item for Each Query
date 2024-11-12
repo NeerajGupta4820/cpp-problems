@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
+        sort(items.begin(),items.end(),[](const vector<int>&a,vector<int>&b){
+            if(a[0]==b[0]) return a[1]<b[1];
+            return a[0]<b[0];
+        });
+        vector<pair<int,int>>filteredItems;
+        int maxele=0;
+        for(auto &item:items){
+            if(item[1]>maxele){
+                maxele=item[1];
+                filteredItems.push_back({item[0],maxele});
+            }
+        }
+        vector<int>ans;              
+        for(int i=0;i<queries.size();i++){
+        int s=0,e=filteredItems.size()-1;
+        int mid=s+(e-s)/2;
+            int num=queries[i];
+            int temp=0;
+            while(s<=e){
+                if (num >= filteredItems[mid].first){
+                    temp=max(temp,filteredItems[mid].second);
+                    s=mid+1;
+                }
+                else {
+                    e=mid-1;
+                }
+                mid=s+(e-s)/2;
+            }
+            ans.push_back(temp);
+        }
+        return ans;
+    }
+};
