@@ -1,0 +1,62 @@
+// rand_int(4) == > 1,2,3,4
+ 
+//   int main() {
+//     int Aprob = 2;
+//     int Bprob = 1;
+//     int Cprob = 1;
+//     int total_prob = Aprob + Bprob + Cprob;
+// x   int result = rand_int(total_prob); // E: use of undeclared identifier 'rand_int'
+//     // 1,2,3,4
+//    if (result <= Aprob) {
+// x     std::cout << "A" << std::endl;
+//     } else if (result <= Aprob + Bprob) {
+// x     cout << "B" << std::endl;
+//     } else {
+// x     cout << "C" << std::endl;
+//     }
+//   }
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+class SelectRandomUser{
+    vector<pair<string,int>>users;
+    public:
+    void adduser(string &username,int prob){
+        users.push_back({username,prob});
+    }
+    string getRandomUser(){
+        int total_prob=0;
+        for(auto &user:users){
+            total_prob+=user.second;
+        }
+        int random_num=rand()%total_prob+1;
+        for(const auto& user:users){
+            if((random_num-=user.second)<=0) {
+                return user.first;
+            }
+        }
+        return "No User Found";
+    }
+};
+int main(){
+    srand(static_cast<unsigned>(time(0)));
+    int n;
+    cout << "Enter number of users: ";
+    cin>>n;
+    SelectRandomUser data;
+    for(int i=0;i<n;i++){
+        string username;
+        int prob;
+        cout<<"Enter the name of the user:";
+        cin>>username;
+        cout<<"Enter the prob value of the user:";
+        cin>>prob;
+        data.adduser(username,prob);
+    }
+    cout << "Randomly selected user: " << data.getRandomUser() << std::endl;
+    return 0;
+}
